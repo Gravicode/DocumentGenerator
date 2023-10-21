@@ -1,0 +1,161 @@
+﻿@page "/browse-folder"
+@inject IJSRuntime IJS
+@inject AppState AppState
+@inject FileIndexer Indexer
+@inject IDialogService DialogService
+@inject NavigationManager NavMgr
+@inject ISnackbar Snackbar
+<h1>Indexing Documents</h1>
+<p>Transform your documents to vector database.</p>
+<MudGrid>
+    <MudItem xs="12">
+        @if (Files == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <MudTable Context="item" Items="@Files" Loading="Indexer.IsProcessing" Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" Filter="new Func<FileItem,bool>(FilterFunc1)" T="FileItem" MultiSelection="true" @bind-SelectedItems="selectedItems1" SortLabel="Sort By">
+                <ToolBarContent>
+                    <MudTextField @bind-Value=searchString1 Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh><MudTableSortLabel SortBy="new Func<FileItem, object>(x=>x.No)">No</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<FileItem, object>(x=>x.FileName)">Name</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<FileItem, object>(x=>x.Ext)">Extension</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<FileItem, object>(x=>x.Size)">Size</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<FileItem, object>(x=>x.Indexed)">Indexed</MudTableSortLabel></MudTh>
+                    <MudTh>Actions</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Name">@item.No</MudTd>
+                    <MudTd DataLabel="Name">@item.FileName</MudTd>
+                    <MudTd DataLabel="Extension">@item.Ext</MudTd>
+                    <MudTd DataLabel="Size">@item.Size.ToString("n0")</MudTd>
+                    <MudTd DataLabel="Indexed">@(item.Indexed?"Yes":"No")</MudTd>
+                    <MudTd DataLabel="Actions">
+                        <MudButton Disabled="@Indexer.IsProcessing" ButtonType="MudBlazor.ButtonType.Button" @onclick="(() => HitDownload(item))" DisableElevation="true" Variant="Variant.Filled" Color="Color.Primary" Size="@Size.Small" StartIcon="@Icons.Material.Filled.Download" Class="mr-1 mt-1">Download</MudButton>
+                        <MudButton Disabled="@Indexer.IsProcessing" ButtonType="MudBlazor.ButtonType.Button" @onclick="(() => PrepareForDelete(item))" DisableElevation="true" Variant="Variant.Filled" Color="Color.Error" Size="@Size.Small" StartIcon="@Icons.Material.Filled.Delete" Class="mr-1 mt-1">Delete</MudButton>
+                    </MudTd>
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager />
+
+                </PagerContent>
+                <NoRecordsContent>
+                    <MudText>Tidak ada file yang ditemukan..</MudText>
+                </NoRecordsContent>
+                <LoadingContent>
+                    <MudText>Sabar menunggu...</MudText>
+                </LoadingContent>
+            </MudTable>
+        }
+    </MudItem>
+        <MudItem xs="12">       
+            <MudPaper Class="pa-4 mb-1 mt-1">
+                    <MudButton Size="Size.Medium" ButtonType="MudBlazor.ButtonType.Button" @onclick="(() => Indexing())" DisableElevation="true" Variant="Variant.Filled" Disabled="@Indexer.IsProcessing" Color="Color.Primary" Class="mr-2">Index Documents</MudButton>
+            </MudPaper>
+            </MudItem>
+</MudGrid>
+@code {
+    FileItem itemObject;
+
+    [CascadingParameter]
+    public MainLayout Layout { get; set; }
+
+    public List<FileItem> Files { get; set; }
+    private bool dense = true;
+    private bool hover = true;
+    private bool striped = true;
+    private bool bordered = false;
+
+    private FileItem selectedItem1 = null;
+
+    private HashSet<FileItem> selectedItems = new HashSet<FileItem>();
+
+    private HashSet<FileItem> selectedItems1 = new HashSet<FileItem>();
+
+    private string searchString1 = "";
+
+    private bool FilterFunc1(FileItem element) => FilterFunc(element, searchString1);
+
+    private bool FilterFunc(FileItem element, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (element.FileName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+
+        return false;
+    }
+
+    async Task Indexing()
+    {
+        if(Files == null || Files.Count<=0){
+            Snackbar.Add($"please put some text files in the folder {FileIndexer.CrawledDir}", Severity.Warning);
+            return;
+        }
+        await Indexer.DoIndexing();
+    }
+    private async Task PrepareForDelete(FileItem item)
+    {
+        itemObject = item;
+        var options = new MudBlazor.DialogOptions { CloseOnEscapeKey = true };
+        var dialog = DialogService.Show<MudConfirmDialog>("Konfirmasi", options);
+        var result = await dialog.Result;
+
+        if (!result.Cancelled)
+        {
+            try
+            {
+                File.Delete(item.FilePath);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            await LoadData();
+            itemObject = null;
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        await LoadData();
+        Indexer.ItemIndexed += async(a, e) =>
+        {
+            var selItem = Files.FirstOrDefault(x => x.FileName == e.FileName);
+            if (selItem != null)
+            {
+                selItem.Indexed = true;
+                await InvokeAsync(StateHasChanged);
+            }
+        };
+
+    }
+
+
+    async Task LoadData()
+    {
+        Files = await Indexer.GetAllFiles();
+    }
+   
+   
+    protected override void OnAfterRender(bool firstRender)
+    {
+
+        if (firstRender)
+        {
+            //IJS.InvokeVoidAsync("ApplyListGrid");
+        }
+    }
+    async Task HitDownload(FileItem file)
+    {
+        var bytes = File.ReadAllBytes(file.FilePath);
+        await FileUtil.SaveAs(IJS, file.FileName, bytes);
+    }
+
+}

@@ -1,0 +1,185 @@
+﻿@page "/master/DocTemplate"
+
+@inject IJSRuntime jsRuntime
+@inject NavigationManager NavMgr
+@inject IDialogService DialogService
+@inject DocTemplateService service
+@inject ISnackbar Snackbar
+
+<h1>Daftar Doc Template</h1>
+
+<p>Gunakan halaman ini untuk melihat Doc Templates.</p>
+
+@if (DataDocTemplate == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <MudTable Context="item" Items="@DataDocTemplate" Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" Filter="new Func<DocTemplate,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Data DocTemplate</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="searchString1" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>Doc Name</MudTh>
+            <MudTh>Description</MudTh>
+            <MudTh>Functions</MudTh>
+            <MudTh>Actions</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Skill Name">@item.DocName</MudTd>
+            <MudTd DataLabel="Function Name">@item.Desc</MudTd>
+            <MudTd DataLabel="Functions">@(string.Join(",", item.DocFunctions))</MudTd>
+            <MudTd DataLabel="Actions">
+                <MudButton ButtonType="ButtonType.Button" Size="Size.Small" @onclick="(() => PrepareForEdit(item))" DisableElevation="true" Variant="Variant.Filled" Color="Color.Primary" Class="mt-1 mr-2">Ubah</MudButton>
+                <MudButton ButtonType="ButtonType.Button" Size="Size.Small" @onclick="(() => PrepareForDelete(item))" DisableElevation="true" Variant="Variant.Filled" Color="Color.Error" Class="mt-1 mr-2">Hapus</MudButton>
+                <MudButton ButtonType="ButtonType.Button" Size="Size.Small" @onclick="(() => Generate(item))" DisableElevation="true" Variant="Variant.Filled" Color="Color.Success" Class="mt-1 mr-2">Generate Doc</MudButton>
+            </MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+
+    <div class="d-flex flex-wrap mt-4">
+        <MudSwitch @bind-Checked="@hover" Color="Color.Primary">Hover</MudSwitch>
+        <MudSwitch @bind-Checked="@dense" Color="Color.Secondary">Dense</MudSwitch>
+        <MudSwitch @bind-Checked="@striped" Color="Color.Tertiary">Striped</MudSwitch>
+        <MudSwitch @bind-Checked="@bordered" Color="Color.Warning">Bordered</MudSwitch>
+    </div>
+
+
+}
+<MudPaper Class="pa-4 mt-4">
+    <MudButton ButtonType="ButtonType.Button" @onclick="(() => InitializeitemObject())" DisableElevation="true" Variant="Variant.Filled" Color="Color.Primary" Class="mr-2">Masukan DocTemplate Baru</MudButton>
+</MudPaper>
+
+@code {
+    DocTemplateDetail detail;
+
+    string customHeader = string.Empty;
+    List<DocTemplate> DataDocTemplate;
+    DocTemplate itemObject = new DocTemplate();
+
+    private bool dense = false;
+    private bool hover = true;
+    private bool striped = false;
+    private bool bordered = false;
+    private string searchString1 = "";
+    private DocTemplate selectedItem1 = null;
+
+    private HashSet<DocTemplate> selectedItems = new HashSet<DocTemplate>();
+
+    private bool FilterFunc1(DocTemplate element) => FilterFunc(element, searchString1);
+
+    private bool FilterFunc(DocTemplate element, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (element.DocName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (element.Desc.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (element.UserName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        return false;
+    }
+    async Task Generate(DocTemplate item)
+    {
+        NavMgr.NavigateTo($"/DocGen/{item.Id}");
+    }
+    async Task DownloadFile(string Url)
+    {
+        if (!string.IsNullOrEmpty(Url))
+        {
+            NavMgr.NavigateTo(Url, true);
+        }
+        else
+        {
+            Snackbar.Add("Url kosong atau tidak valid.", Severity.Warning);
+
+        }
+    }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+
+        DataDocTemplate = service.GetAllData();
+
+
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+        }
+    }
+
+    private async Task InitializeitemObject()
+    {
+
+        itemObject = new DocTemplate();
+
+        customHeader = "Masukan Doc Template Baru";
+
+        var action = new Action(DataChanged);
+        var parameters = new DialogParameters { ["TaskObject"] = itemObject, ["CustomHeader"] = customHeader, ["DataChanged"] = action };
+        var options = new MudBlazor.DialogOptions { CloseOnEscapeKey = true, FullWidth = true };
+        var dialog = DialogService.Show<DocTemplateDetail>(customHeader, parameters, options);
+        var result = await dialog.Result;
+
+        if (!result.Cancelled)
+        {
+            DataDocTemplate = service.GetAllData();
+            //In a real world scenario we would reload the data from the source here since we "removed" it in the dialog already.
+            //long.TryParse(result.Data.ToString(), out var NewId);
+        }
+    }
+    private async void DataChanged()
+    {
+        DataDocTemplate = service.GetAllData();
+        StateHasChanged();
+    }
+
+    private async Task PrepareForEdit(DocTemplate item)
+    {
+        customHeader = "Ubah Data Doc Template";
+        itemObject = item;
+        var action = new Action(DataChanged);
+        var parameters = new DialogParameters { ["TaskObject"] = itemObject, ["CustomHeader"] = customHeader, ["DataChanged"] = action };
+
+        var dialog = DialogService.Show<DocTemplateDetail>(customHeader, parameters);
+        var result = await dialog.Result;
+
+        if (!result.Cancelled)
+        {
+            DataDocTemplate = service.GetAllData();
+            //In a real world scenario we would reload the data from the source here since we "removed" it in the dialog already.
+            //long.TryParse(result.Data.ToString(), out var NewId);
+        }
+
+    }
+    private async Task PrepareForDelete(DocTemplate item)
+    {
+        itemObject = item;
+        var options = new MudBlazor.DialogOptions { CloseOnEscapeKey = true };
+        var dialog = DialogService.Show<MudConfirmDialog>("Konfirmasi", options);
+        var result = await dialog.Result;
+
+        if (!result.Cancelled)
+        {
+            var task = service.DeleteData(itemObject);
+            //await jsRuntime.InvokeAsync<object>("CloseModal", "confirmDeleteModal");
+            DataDocTemplate = service.GetAllData();
+            itemObject = new DocTemplate() { };
+        }
+    }
+
+
+}
+

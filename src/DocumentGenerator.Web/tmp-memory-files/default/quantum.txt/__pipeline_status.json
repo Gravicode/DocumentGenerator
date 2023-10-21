@@ -1,0 +1,116 @@
+{
+  "index": "default",
+  "document_id": "quantum.txt",
+  "execution_id": "7732746f84cd47eeaf61e43956de8367",
+  "steps": [
+    "extract",
+    "partition",
+    "gen_embeddings",
+    "save_embeddings",
+    "summarize",
+    "gen_embeddings",
+    "save_embeddings"
+  ],
+  "remaining_steps": [],
+  "completed_steps": [
+    "extract",
+    "partition",
+    "gen_embeddings",
+    "save_embeddings",
+    "summarize",
+    "gen_embeddings",
+    "save_embeddings"
+  ],
+  "tags": {
+    "user": [
+      "user1"
+    ],
+    "filename": [
+      "quantum.txt"
+    ]
+  },
+  "creation": "2023-10-21T03:53:43.1551103+00:00",
+  "last_update": "2023-10-21T03:53:56.9898237+00:00",
+  "files": [
+    {
+      "id": "96959703d49b4997b36709ae50108aa7",
+      "name": "quantum.txt",
+      "size": 3924,
+      "mime_type": "text/plain",
+      "artifact_type": "Undefined",
+      "processed_by": [
+        "extract"
+      ],
+      "generated_files": {
+        "quantum.txt.extract.txt": {
+          "id": "37bbac2f7453474987271c458ff9e6b1",
+          "name": "quantum.txt.extract.txt",
+          "size": 3924,
+          "mime_type": "text/plain",
+          "artifact_type": "ExtractedText",
+          "parent_id": "96959703d49b4997b36709ae50108aa7",
+          "content_sha256": "",
+          "processed_by": [
+            "extract",
+            "partition",
+            "summarize"
+          ]
+        },
+        "quantum.txt.partition.0.txt": {
+          "id": "467448d7363c4e56853fd2b146bc5748",
+          "name": "quantum.txt.partition.0.txt",
+          "size": 3909,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "96959703d49b4997b36709ae50108aa7",
+          "content_sha256": "93e868d68c1c4eb68da3d1667cfb41654750a1eb468cf6f5947d56550836a118",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "quantum.txt.partition.0.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "ed712d74955544e1b8c9d53042115240",
+          "name": "quantum.txt.partition.0.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19671,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "96959703d49b4997b36709ae50108aa7",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "quantum.txt.summarize.0.txt": {
+          "id": "60c8991bfce04d8282174dc197a186ef",
+          "name": "quantum.txt.summarize.0.txt",
+          "size": 1066,
+          "mime_type": "text/plain",
+          "artifact_type": "SyntheticData",
+          "parent_id": "96959703d49b4997b36709ae50108aa7",
+          "content_sha256": "a3259301fbd97e35e15b295b458c4d67e54a6f6fb8568b76882e0e7b00bd5ddd",
+          "processed_by": [
+            "summarize",
+            "gen_embeddings"
+          ]
+        },
+        "quantum.txt.summarize.0.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "c476bf1a3025426e84f2347de8827809",
+          "name": "quantum.txt.summarize.0.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19624,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "96959703d49b4997b36709ae50108aa7",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        }
+      }
+    }
+  ],
+  "custom_data": {},
+  "previous_executions_to_purge": []
+}

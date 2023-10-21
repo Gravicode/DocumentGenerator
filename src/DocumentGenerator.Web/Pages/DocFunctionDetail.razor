@@ -1,0 +1,147 @@
+﻿@inject IJSRuntime jsRuntime
+@using System.IO
+@inject DocFunctionService service
+@using System.Linq
+@inject ISnackbar Snackbar
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Info" Class="mr-3 mb-n1" />
+            @CustomHeader
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <EditForm Model="@TaskObject" OnValidSubmit="OnValidSubmit">
+            <DataAnnotationsValidator />
+            <MudGrid>
+                <MudItem xs="12" sm="12">
+                    <MudCard>
+                        <MudCardContent>
+                            <input type="hidden" @bind="@TaskObject.Id" />
+                            <MudTextField Label="Skill Name" HelperText="Skill Name"
+                                          @bind-Value="TaskObject.SkillName" For="@(() => TaskObject.SkillName)" />
+                            <MudTextField Label="Function Name" Class="mt-3" Disabled="@(TaskObject.Id>0)"
+                                          @bind-Value="TaskObject.FunctionName" For="@(() => TaskObject.FunctionName)" InputType="InputType.Text" />
+                            <MudSelect T="FunctionTypes" Label="Function Type" @bind-Value="TaskObject.FunctionType" AnchorOrigin="Origin.BottomCenter">
+                                @foreach (FunctionTypes fun in Enum.GetValues(typeof(FunctionTypes)))
+                                {
+                                    <MudSelectItem Value="@(fun)" />
+                                }
+                            </MudSelect>
+                            @if(TaskObject.FunctionType == FunctionTypes.RAG)
+                            {
+                                <MudTextField Label="Tag Filter" Class="mt-3"
+                                          @bind-Value="TaskObject.TagFilter" For="@(() => TaskObject.TagFilter)" InputType="InputType.Text" />
+                            }
+                            <MudTextField Label="Description" Class="mt-3"
+                                          @bind-Value="TaskObject.Desc" For="@(() => TaskObject.Desc)" InputType="InputType.Text" />
+                            <MudTextField Label="Prompt" Class="mt-3"
+                                          @bind-Value="TaskObject.Prompt" Lines="8" For="@(() => TaskObject.Prompt)" InputType="InputType.Text" />
+                            <MudTextField Label="ResultTag" Class="mt-3"
+                                          @bind-Value="TaskObject.ResultTag" For="@(() => TaskObject.ResultTag)" InputType="InputType.Text" />
+                            <MudTextField Label="Parameter (separate by comma)" Class="mt-3"
+                                          @bind-Value="Parameters" For="@(() => Parameters)" InputType="InputType.Text" />
+                            <MudTextField Label="MaxToken" Class="mt-3"
+                                          @bind-Value="TaskObject.MaxToken" For="@(() => TaskObject.MaxToken)" InputType="InputType.Text" />
+                            <MudTextField Label="Temp" Class="mt-3"
+                                          @bind-Value="TaskObject.Temp" For="@(() => TaskObject.Temp)" InputType="InputType.Text" />
+                            <MudTextField Label="TopP" Class="mt-3"
+                                          @bind-Value="TaskObject.TopP" For="@(() => TaskObject.TopP)" InputType="InputType.Text" />
+                            <MudTable Items="@TaskObject.Parameters"  Context="item" Hover="true" Breakpoint="Breakpoint.Sm"  T="string">
+                                <HeaderContent>
+                                    <MudTh>Parameter</MudTh>
+                                    <MudTh>Actions</MudTh>
+                                </HeaderContent>
+                                <RowTemplate>
+                                    <MudTd DataLabel="Parameter">@item</MudTd>
+                                    <MudTd DataLabel="Actions"><MudButton Color="Color.Primary" OnClick="()=>AddPrompt(item)" >Add to Prompt</MudButton></MudTd>
+                                </RowTemplate>
+                            </MudTable>
+                        </MudCardContent>
+                        <MudCardActions>
+                            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="mr-2">Simpan</MudButton>
+                            <MudButton ButtonType="ButtonType.Button" OnClick="Cancel" Variant="Variant.Filled" Color="Color.Secondary">Cancel</MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+
+            </MudGrid>
+        </EditForm>
+    </DialogContent>
+    <DialogActions>
+
+    </DialogActions>
+</MudDialog>
+
+
+@code {
+
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    private void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+    string _parameters;
+    public string Parameters
+    {
+        get { return _parameters; }
+        set
+        {
+            _parameters = value;
+            TaskObject.Parameters = _parameters.Split(",").Select(x =>  x.Trim().Replace(" ","_").ToUpper() ).ToList();
+        }
+    }
+    [Parameter]
+    public string CustomHeader { get; set; }
+    [Parameter]
+    public DocFunction TaskObject { get; set; }
+    [Parameter]
+    public Action DataChanged { get; set; }
+    async Task AddPrompt(string teks)
+    {
+        this.TaskObject.Prompt += @"{{$" + teks + "}}";
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        if (TaskObject.Parameters != null)
+        {
+            Parameters = string.Join(",",TaskObject.Parameters);
+        }
+    }
+    private void OnValidSubmit(EditContext context)
+    {
+        TaskObject.FunctionName = TaskObject.FunctionName.Replace(" ", "_").Trim().ToUpper();
+        if (string.IsNullOrEmpty(_parameters.Trim()))
+        {
+            TaskObject.Parameters = new();
+        }
+        if (TaskObject.Id<=0)
+        {
+            if (service.IsExist(TaskObject.FunctionName))
+            {
+                Snackbar.Add($"Function name: {TaskObject.FunctionName} is already exist");
+                return;
+            }
+            TaskObject.ResultTag = !TaskObject.ResultTag.Contains("[$") ? $"[${TaskObject.ResultTag.Trim().Replace(" ", "_").ToUpper()}]" : TaskObject.ResultTag.Trim();
+
+            var hasil = service.InsertData(TaskObject);
+            if (!hasil)
+            {
+                Snackbar.Add("Gagal menyimpan data. Isi data dengan lengkap.", Severity.Error);
+                //toastService.ShowError("Gagal menyimpan data. Isi data dengan lengkap.", "Perhatian");
+            }
+        }
+        else
+        {
+            service.UpdateData(TaskObject);
+        }
+
+        //In a real world scenario this bool would probably be a service to delete the item from api/database
+        Snackbar.Add("Data Saved", Severity.Success);
+        MudDialog.Close(DialogResult.Ok(TaskObject.Id));
+        DataChanged?.Invoke();
+    }
+
+}

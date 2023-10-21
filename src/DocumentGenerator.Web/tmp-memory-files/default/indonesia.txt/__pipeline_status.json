@@ -1,0 +1,1468 @@
+{
+  "index": "default",
+  "document_id": "indonesia.txt",
+  "execution_id": "7c852c582003465e89d75bab8899cee8",
+  "steps": [
+    "extract",
+    "partition",
+    "gen_embeddings",
+    "save_embeddings",
+    "summarize",
+    "gen_embeddings",
+    "save_embeddings"
+  ],
+  "remaining_steps": [
+    "summarize",
+    "gen_embeddings",
+    "save_embeddings"
+  ],
+  "completed_steps": [
+    "extract",
+    "partition",
+    "gen_embeddings",
+    "save_embeddings"
+  ],
+  "tags": {
+    "user": [
+      "user1"
+    ],
+    "filename": [
+      "indonesia.txt"
+    ]
+  },
+  "creation": "2023-10-21T03:09:37.607335+00:00",
+  "last_update": "2023-10-21T03:10:10.434983+00:00",
+  "files": [
+    {
+      "id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+      "name": "indonesia.txt",
+      "size": 170551,
+      "mime_type": "text/plain",
+      "artifact_type": "Undefined",
+      "processed_by": [
+        "extract"
+      ],
+      "generated_files": {
+        "indonesia.txt.extract.txt": {
+          "id": "fd38038d3eea4a6f8bacdc0e100617c9",
+          "name": "indonesia.txt.extract.txt",
+          "size": 170329,
+          "mime_type": "text/plain",
+          "artifact_type": "ExtractedText",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "extract",
+            "partition"
+          ]
+        },
+        "indonesia.txt.partition.0.txt": {
+          "id": "1453ae9b3a18485885fd3e2ff94fdd23",
+          "name": "indonesia.txt.partition.0.txt",
+          "size": 3826,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "8f7b81491fc60f85e2fc87ded4b06613b8baf01617623a576520873d82f5b199",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.1.txt": {
+          "id": "cd4d9bc9988843c89a0f6c62b0e36f71",
+          "name": "indonesia.txt.partition.1.txt",
+          "size": 3393,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "e6de39fb478eda6332ae4852fd9877d845b030284c7ac1546e0ecb6396dc3216",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.2.txt": {
+          "id": "b1e9e3dd37724269a5366823e8abcece",
+          "name": "indonesia.txt.partition.2.txt",
+          "size": 3767,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "68977918fa9439e0942957655a5647cf7587a2870e5c2bdd3ce094b57d9e48f0",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.3.txt": {
+          "id": "97703d9fbb8542e28973c059e30cea09",
+          "name": "indonesia.txt.partition.3.txt",
+          "size": 3318,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "d4847560cd160158acaface8f9663af0edb330579ad23e4f11f04effa4cbfe7e",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.4.txt": {
+          "id": "1f28adcebcd545c690c8689d08c8e6fa",
+          "name": "indonesia.txt.partition.4.txt",
+          "size": 3084,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "3eee8503fcac45e8a9e8c1eb56f6e215dc33b537d8fad7e6afaabf87404b5785",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.5.txt": {
+          "id": "cc43ecd53f654beab4f50c321e76ddf8",
+          "name": "indonesia.txt.partition.5.txt",
+          "size": 2800,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "4a48b48bf51519b81a0840ae383d603c5717044c5c483a2b7720b182b3a9b9c1",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.6.txt": {
+          "id": "0f44a4045d8d44cb8f9eee9788746b44",
+          "name": "indonesia.txt.partition.6.txt",
+          "size": 3194,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "d9df9b4eb1a79192bca32649bae3debf98c352d1a22e94793862f3c0d9e52402",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.7.txt": {
+          "id": "6d649ead808f40cb8f22125bf3fa71fa",
+          "name": "indonesia.txt.partition.7.txt",
+          "size": 3808,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "736226e1cab98810e31c0b158e735322193dcffbbba816dd5954a86276cc6f5b",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.8.txt": {
+          "id": "3c13904b328d44e780040fe18fdca9d1",
+          "name": "indonesia.txt.partition.8.txt",
+          "size": 3306,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "e572a6ec79edf23c71cf87e1d6a4a8d96e36927e7634c438fe445aeeb7909f44",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.9.txt": {
+          "id": "7868df5de94049ecbd813ba5459ee226",
+          "name": "indonesia.txt.partition.9.txt",
+          "size": 3569,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "cfcc1c142a3ad31d2db1ecfee7ab61cadff39152df065b7ef9ead7426ac0ab60",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.10.txt": {
+          "id": "01b880145ce5443a958e878919451e3e",
+          "name": "indonesia.txt.partition.10.txt",
+          "size": 3121,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "16543869255a43de5fd504724773608f52a1d6c7d8f40067c9741815323b6c1b",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.11.txt": {
+          "id": "d33e5e80d2994a1d9dfe4a090e496515",
+          "name": "indonesia.txt.partition.11.txt",
+          "size": 3344,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "c9292df0b8d18c15a6901badd7b28c6076deb1bf6b3a1d8c4af8de7a912223a1",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.12.txt": {
+          "id": "ae655a36815249909c2c704b4e0c3ac3",
+          "name": "indonesia.txt.partition.12.txt",
+          "size": 3555,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "4caebf605ca93d6007e71e3ade6a4843919c43638e8031690e29d47663de4343",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.13.txt": {
+          "id": "af9618c8163641ff922f03c47997bcf3",
+          "name": "indonesia.txt.partition.13.txt",
+          "size": 3371,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "d37e362de80e29399d9a32bd4d574559826934cdb7b731cfd33dd17adaa2f284",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.14.txt": {
+          "id": "e9fb203137bd45f6b1f497a09d60312e",
+          "name": "indonesia.txt.partition.14.txt",
+          "size": 3266,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "9bea87603f984f6d00b3d4495f42187263d4d7786b7e8c050261f5e88191a395",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.15.txt": {
+          "id": "50e2de361ce54471b8130f54b758acd0",
+          "name": "indonesia.txt.partition.15.txt",
+          "size": 3631,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "9879aa2fcd485751478e0de9e29f6fce211d188baa9b9c75c4858b39160e8f49",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.16.txt": {
+          "id": "7ccf1f5750874b07b5cf23ebcd53e1ff",
+          "name": "indonesia.txt.partition.16.txt",
+          "size": 3610,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "6cb0d431533783703ddff30673f48e1eaf97d60cb693278395eaac2827ba9df0",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.17.txt": {
+          "id": "021ea75e20d64976ae96338a46efffe3",
+          "name": "indonesia.txt.partition.17.txt",
+          "size": 3384,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "b3d0c4da66f1d9595347d170d08414184270858ca6ba042ea420898c10af8288",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.18.txt": {
+          "id": "5bd4ab1f34ce40c3aaa90cbc6d2af5a9",
+          "name": "indonesia.txt.partition.18.txt",
+          "size": 3225,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "1e689e9b651d9ff8b22fd680628d04c11b3d745636d2f903ab73ec9b1688e7d4",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.19.txt": {
+          "id": "46897ec6f91646359f4ebf136fae2ed6",
+          "name": "indonesia.txt.partition.19.txt",
+          "size": 3340,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "d8e4a88f0f8103974c88aa33ea153fe358e970775a91d179af53a2ab280c307d",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.20.txt": {
+          "id": "e735557bb230495d9d48f325b215cc4c",
+          "name": "indonesia.txt.partition.20.txt",
+          "size": 3298,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "8f292f752eb3f99c2b0a7258135b7142319c16a4a53e59242146d58beb859d76",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.21.txt": {
+          "id": "30efb9f66afd4c7381e139317767ad41",
+          "name": "indonesia.txt.partition.21.txt",
+          "size": 3045,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "cdff09df143afbdf9b17ebf737c9b9583f3993b57e10a41e253cb92928b1c82e",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.22.txt": {
+          "id": "03e9966abdc642378f5c33358e0b0f63",
+          "name": "indonesia.txt.partition.22.txt",
+          "size": 3428,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "f81e61aecdcd7a998391a9cf1d67c40cae58f04dba11f9ff82a1316d5c0010e4",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.23.txt": {
+          "id": "75fdaeeaf02e44a79da392f0b887ac9e",
+          "name": "indonesia.txt.partition.23.txt",
+          "size": 3194,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "746d68bb09e514db9a0593bfb3caef8be52010d4799fa14e32000f7cb3ab1fe9",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.24.txt": {
+          "id": "345b66449549402fa316ce0cfb16cbe0",
+          "name": "indonesia.txt.partition.24.txt",
+          "size": 3701,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "fa8a98c508b71dfa38605f7fd4aba389c0c7e12e12649276cc47bcc8a1c1abc6",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.25.txt": {
+          "id": "0790358567e248b19cb482c6a6009669",
+          "name": "indonesia.txt.partition.25.txt",
+          "size": 2959,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "35c92d3906f434213f974932d52721317f6ce9a76c8d159401a844790f12fc52",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.26.txt": {
+          "id": "051b230d49db472c88e24b8cd26e4c65",
+          "name": "indonesia.txt.partition.26.txt",
+          "size": 3548,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "c7338ad0a90d3ab011570e4db86dd664f1767825f3600c316ac09a84a8238b41",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.27.txt": {
+          "id": "f4a0d2e2120a437da0db469b380b9a71",
+          "name": "indonesia.txt.partition.27.txt",
+          "size": 3477,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "9f861519b3f15efb90ca512e9e83b4da2b8937dd62f3b2ce0ebc5909ee9c98cf",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.28.txt": {
+          "id": "ce77b8ebac97455fb7b5a72c87e5f628",
+          "name": "indonesia.txt.partition.28.txt",
+          "size": 3715,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "2612c28f598db96918f73852f438a946fedc42285da61e3799fdfbcf7dd2c95f",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.29.txt": {
+          "id": "5de060ec2fd44ad8bc9c5f8b62268a3f",
+          "name": "indonesia.txt.partition.29.txt",
+          "size": 3674,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "f5954af354ba322c92a12d7b291326a8141470f90dc7181906fc9af443ac9397",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.30.txt": {
+          "id": "de1917c5446e46dd895b870864f1aba0",
+          "name": "indonesia.txt.partition.30.txt",
+          "size": 3805,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "e366233f20fc6dcc593c8ceb86094162c0857de98ebcaf84e226fa15cf870233",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.31.txt": {
+          "id": "7b06aeb1b67a4e7e8969096e59a847a6",
+          "name": "indonesia.txt.partition.31.txt",
+          "size": 3952,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "75d911303bc53ebb5841fd5f66f898eacf3f1a7b2b16d8a3a0860c4c201597d8",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.32.txt": {
+          "id": "7cc69920a31a4aa89406e65868ad3e29",
+          "name": "indonesia.txt.partition.32.txt",
+          "size": 3720,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "93b1ccef8a3ea8377e5420d810f9b4e179131a82b2fa4acb9704efacff6d0b27",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.33.txt": {
+          "id": "9bcb30818c58475f9259f5011be8bd20",
+          "name": "indonesia.txt.partition.33.txt",
+          "size": 3003,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "0da8be24b7fb07b645d5aee3c56e4a15eab4ece8b958bb21ee0b25cbc7d589ce",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.34.txt": {
+          "id": "015d3d6c94d04918b90f4720f2f45972",
+          "name": "indonesia.txt.partition.34.txt",
+          "size": 3849,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "10f66cbf41b8e14105ba5459091ce8b620f29c78e2d2421a03c9b1a5774ecc6d",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.35.txt": {
+          "id": "360f0c0609a7489d8c99f140a61d2655",
+          "name": "indonesia.txt.partition.35.txt",
+          "size": 3529,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "9733c668fb1b3fa985cdc9ae51fb6bc81cf55fa3cb7b98585f324fb7b7a222d9",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.36.txt": {
+          "id": "e3c5f2082f9040349f35a3337041d527",
+          "name": "indonesia.txt.partition.36.txt",
+          "size": 3501,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "cc0ef2a21202f707917fff0fe9ea65fa258a272f78a20e9d1c28d98710581544",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.37.txt": {
+          "id": "c080d469e2034488963cf263cd5c4a6d",
+          "name": "indonesia.txt.partition.37.txt",
+          "size": 3587,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "0c7d69afbdc47dff1f9484fca86b0015478eb66bb2396643e31c432b9214eb77",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.38.txt": {
+          "id": "c11b7f0b95ed41dea1e73f70c928876e",
+          "name": "indonesia.txt.partition.38.txt",
+          "size": 3247,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "c128f842b9626ac76a281416e52f05471598ba557a22b3b5d3ea60ea15cea875",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.39.txt": {
+          "id": "8995ddd62bbf4b3d9856bfc8c7d8a84d",
+          "name": "indonesia.txt.partition.39.txt",
+          "size": 3394,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "d8523217cd83ded989e3c4d7b1cf9977db8535a9a58eee379e022abf72de4fc5",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.40.txt": {
+          "id": "39b7d6fac70f405c82f848b07b6777f2",
+          "name": "indonesia.txt.partition.40.txt",
+          "size": 2763,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "fdb61491fa52c0ee436314d251e9bb06232e288c97f64766ab25aba5332bc647",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.41.txt": {
+          "id": "1f4f89911f3e43cc996252c8235a5036",
+          "name": "indonesia.txt.partition.41.txt",
+          "size": 3556,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "8ddeda40b5da113508750cfda98b6d257bbc1d8d937f49d98acab0829e3f5eda",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.42.txt": {
+          "id": "2cfe036dc3cc44aeb37cc8222ef39429",
+          "name": "indonesia.txt.partition.42.txt",
+          "size": 3195,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "0fe3c2a2845974656074edcd3bc8e4d4882631bfae5d5c9eaebe1e7c10587764",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.43.txt": {
+          "id": "ca0d2322bbbf4abc806a685bec3ced0e",
+          "name": "indonesia.txt.partition.43.txt",
+          "size": 3339,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "6716cca4a6b8f8aacf0d0707c93ba940dd8b1346093860cadaf85854a758e6b4",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.44.txt": {
+          "id": "872009b0e3134071b5f7f1bafa011e6d",
+          "name": "indonesia.txt.partition.44.txt",
+          "size": 3508,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "5ae34c130385de8f5de9a0e41fe04dcc0d980546df16f399f200f1b8a6620cc5",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.45.txt": {
+          "id": "26bde98ef0dc4e7ebc585ebe79d5c2ae",
+          "name": "indonesia.txt.partition.45.txt",
+          "size": 3165,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "523ca9484f8db6ba6243c28f20d4809a75f5bec12cf8cd5c175c76f93a22cea4",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.46.txt": {
+          "id": "4b0c18a09b594edb92e9ce4ed2038f19",
+          "name": "indonesia.txt.partition.46.txt",
+          "size": 3584,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "1e296b596c4c5ed9d2f19eb7a1030020142777461024e0c5eeb761b61c97cca6",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.47.txt": {
+          "id": "59b985f39c1f4103a1c67183e5c28845",
+          "name": "indonesia.txt.partition.47.txt",
+          "size": 3611,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "078932e6f88b5c870bb87174dc985e61da11ebda9e3db4e07e89f7c96a00b7a5",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.48.txt": {
+          "id": "f51e99140ad1497e93bf97657506c8f2",
+          "name": "indonesia.txt.partition.48.txt",
+          "size": 2921,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "6c5ee96e658960fc5f43792eb8f9e24e41cadc779b553f18126b2a92079a5e93",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.49.txt": {
+          "id": "d2f6c114f82549a1a29cee8491b2e49b",
+          "name": "indonesia.txt.partition.49.txt",
+          "size": 3584,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "3ef81b1970b2a5e931b8d6fd0675ef86fe4b0f80e47163db123547958fae7c52",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.50.txt": {
+          "id": "71a7ba5265134291bdd10ffa60ff5c8d",
+          "name": "indonesia.txt.partition.50.txt",
+          "size": 3550,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "8d142ecb43c3c5009d92973711ae2718f2f32f4b2c20daabb661620a4341887e",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.51.txt": {
+          "id": "56ae7854571f48e580a6db42c7e79c16",
+          "name": "indonesia.txt.partition.51.txt",
+          "size": 3663,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "b09ab3fc820ece0dd9584759b40c008736228008e623709c2bbdc6fcf8b34c23",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.52.txt": {
+          "id": "cf8381969c6d4f81a5e8da2d1d80b39f",
+          "name": "indonesia.txt.partition.52.txt",
+          "size": 3139,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "81a5133f617f8c90a70b61c5929549df76942eff23c49677bc999399fb931a54",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.53.txt": {
+          "id": "166c17c7c8eb4cf3bf424797c295eaca",
+          "name": "indonesia.txt.partition.53.txt",
+          "size": 3226,
+          "mime_type": "text/plain",
+          "artifact_type": "TextPartition",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "232b9b828d274cf1d92282b73c27c8089ddd807c17ff3232baa483dc7520a14f",
+          "processed_by": [
+            "partition",
+            "gen_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.0.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "4bd5b3eb6a854218898b9b9e7b96677d",
+          "name": "indonesia.txt.partition.0.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19636,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.1.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "8f86a52c250c430f8ab59f84dde51198",
+          "name": "indonesia.txt.partition.1.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19635,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.2.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "388816e20141490d8f23f1a2d5901b76",
+          "name": "indonesia.txt.partition.2.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19585,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.3.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "24310a8ab411427eb87a973035858d5f",
+          "name": "indonesia.txt.partition.3.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19616,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.4.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "f6f17c58235544748cb04dfc345fc5de",
+          "name": "indonesia.txt.partition.4.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19660,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.5.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "414e990fd7df472e986dc80fa3c2db73",
+          "name": "indonesia.txt.partition.5.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19707,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.6.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "deda4fadcd614f9fb8f6b3950fdeec4b",
+          "name": "indonesia.txt.partition.6.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19650,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.7.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "e1ab21a5d1e348c3ba496cce22e08af8",
+          "name": "indonesia.txt.partition.7.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19706,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.8.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "f8092b21a4d748179aa0de9c8d0b204e",
+          "name": "indonesia.txt.partition.8.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19661,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.9.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "85facc6a5dc04f9c9e07e31656042bb9",
+          "name": "indonesia.txt.partition.9.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19627,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.10.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "7a5856c02f6246ebb4fd7dd337c0bf60",
+          "name": "indonesia.txt.partition.10.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19596,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.11.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "5773fa0c466c47aaa715218f85141625",
+          "name": "indonesia.txt.partition.11.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19646,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.12.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "bccf6911a1c74b87900210366e56aa26",
+          "name": "indonesia.txt.partition.12.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19623,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.13.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "c13e906388bf4f3e918258b210c27372",
+          "name": "indonesia.txt.partition.13.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19660,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.14.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "f55b51f996734248930bd76766bf6d28",
+          "name": "indonesia.txt.partition.14.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19648,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.15.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "3d8ee475fecd4015ac1233887592f073",
+          "name": "indonesia.txt.partition.15.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19698,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.16.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "84224e6670be4bf5ba9f7de9d6fd0f26",
+          "name": "indonesia.txt.partition.16.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19614,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.17.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "701d10106eb9414eaa1139f7011f133b",
+          "name": "indonesia.txt.partition.17.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19559,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.18.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "6b3164642ded4a0b955d9893a96e5f4b",
+          "name": "indonesia.txt.partition.18.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19629,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.19.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "6651f22085b54a009bd16d047b2c1b02",
+          "name": "indonesia.txt.partition.19.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19627,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.20.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "b25c6b0709f74bba9094b05672b10f32",
+          "name": "indonesia.txt.partition.20.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19659,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.21.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "91049dc33c27445ab1012fbbedd54024",
+          "name": "indonesia.txt.partition.21.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19625,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.22.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "913059fbc8794806947a29ef27a0cad4",
+          "name": "indonesia.txt.partition.22.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19617,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.23.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "8a5cdb37fb734671b000fabad44a95ee",
+          "name": "indonesia.txt.partition.23.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19650,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.24.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "ae5bda6fc09d4505a16e80e89f84abd8",
+          "name": "indonesia.txt.partition.24.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19609,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.25.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "f8dd7ec5ccea492fbc86bf549e7fffcd",
+          "name": "indonesia.txt.partition.25.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19648,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.26.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "274a7bb2c4a74538b0a26238b87dc145",
+          "name": "indonesia.txt.partition.26.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19623,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.27.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "a936e3a80bb54fd7aba23cfeaeccc4eb",
+          "name": "indonesia.txt.partition.27.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19662,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.28.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "63fb554eff8f405bbb1b62dd9ba9f498",
+          "name": "indonesia.txt.partition.28.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19689,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.29.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "bfb6562a1a674a9a9a3bfe8b194adc3f",
+          "name": "indonesia.txt.partition.29.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19667,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.30.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "689c979fee1a41588a00b30229b21ba6",
+          "name": "indonesia.txt.partition.30.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19615,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.31.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "2c44ef5df8d547399e7cd374b5bd3bba",
+          "name": "indonesia.txt.partition.31.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19664,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.32.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "85965cd12a6f49cc814a77edff6e9e4e",
+          "name": "indonesia.txt.partition.32.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19639,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.33.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "ea65262bf4dc478b955c4b267cef9c61",
+          "name": "indonesia.txt.partition.33.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19645,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.34.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "99c53ae889f64b779714bb35bd17cd2d",
+          "name": "indonesia.txt.partition.34.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19618,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.35.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "2eb5f0b6d30b48d3af221bc3bcb539c8",
+          "name": "indonesia.txt.partition.35.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19650,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.36.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "7e681aa9f4524da09006281950976f4e",
+          "name": "indonesia.txt.partition.36.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19600,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.37.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "37c5e53fde3845fdb637180143dbbc01",
+          "name": "indonesia.txt.partition.37.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19562,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.38.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "3e48ce2581584d5091f34725766260aa",
+          "name": "indonesia.txt.partition.38.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19625,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.39.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "d4bce769f4dd4cb5b0f733e995a1056e",
+          "name": "indonesia.txt.partition.39.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19584,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.40.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "659ab820f9584faa853548bf6fa78c70",
+          "name": "indonesia.txt.partition.40.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19641,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.41.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "05d3d239094a4b3299ccb5629e8c4367",
+          "name": "indonesia.txt.partition.41.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19645,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.42.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "bf992002530e4c74a241672e16dc8c8d",
+          "name": "indonesia.txt.partition.42.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19652,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.43.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "ceb81fec361a4f9e91e7a40964ce9da4",
+          "name": "indonesia.txt.partition.43.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19708,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.44.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "4b62da761dc34eeea5373b40dd531da6",
+          "name": "indonesia.txt.partition.44.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19697,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.45.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "dcf37848a89a42249e5d032bfaf51783",
+          "name": "indonesia.txt.partition.45.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19621,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.46.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "89419b48ef78488d9f1a36b7d83c2956",
+          "name": "indonesia.txt.partition.46.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19631,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.47.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "ee6aaf62dfaa4ea98cf19dfc5ab0d4f1",
+          "name": "indonesia.txt.partition.47.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19588,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.48.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "50fcfe53e9404f2abdf8d071c4de421c",
+          "name": "indonesia.txt.partition.48.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19655,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.49.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "8ac477dcc008452499c18819b8cdc8e3",
+          "name": "indonesia.txt.partition.49.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19694,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.50.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "b62ddcf4335c40f29a26ff37f6157e63",
+          "name": "indonesia.txt.partition.50.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19629,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.51.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "21e43b1682974adb9a7c55e81bf5020d",
+          "name": "indonesia.txt.partition.51.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19587,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.52.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "d50f5c7d9ca940f3b6be6238f28a2be5",
+          "name": "indonesia.txt.partition.52.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19672,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        },
+        "indonesia.txt.partition.53.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding": {
+          "id": "759b246e1f954ba192ae963afa36f837",
+          "name": "indonesia.txt.partition.53.txt.OpenAI.TextEmbedding.OpenAITextEmbeddingGeneration.TODO.text_embedding",
+          "size": 19657,
+          "mime_type": "float[]",
+          "artifact_type": "TextEmbeddingVector",
+          "parent_id": "49949a3ef6df407eb1ab7d0e4ca21a5d",
+          "content_sha256": "",
+          "processed_by": [
+            "gen_embeddings",
+            "save_embeddings"
+          ]
+        }
+      }
+    }
+  ],
+  "custom_data": {},
+  "previous_executions_to_purge": []
+}

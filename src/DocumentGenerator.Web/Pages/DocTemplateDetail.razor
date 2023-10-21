@@ -1,0 +1,171 @@
+﻿@inject IJSRuntime jsRuntime
+@using System.IO
+@inject DocTemplateService service
+@inject DocFunctionService FuncSvc
+@using System.Linq
+@inject ISnackbar Snackbar
+@inject FileBlobHelper FileBlobHelper
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Info" Class="mr-3 mb-n1" />
+            @CustomHeader
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <EditForm Model="@TaskObject" OnValidSubmit="OnValidSubmit">
+            <DataAnnotationsValidator />
+            <MudGrid>
+                <MudItem xs="12" sm="12">
+                    <MudCard>
+                        <MudCardContent>
+                            <input type="hidden" @bind="@TaskObject.Id" />
+                            <MudTextField Label="Doc Name" HelperText="Doc Name"
+                                          @bind-Value="TaskObject.DocName" For="@(() => TaskObject.DocName)" />
+                            <MudTextField Label="Desc" Class="mt-3"
+                                          @bind-Value="TaskObject.Desc" For="@(() => TaskObject.Desc)" InputType="InputType.Text" />
+                            <MudTextField Label="UserName" Class="mt-3"
+                                          @bind-Value="TaskObject.UserName" For="@(() => TaskObject.UserName)" InputType="InputType.Text" />
+                          <MudFileUpload Context="uploadcontext" Accept=".doc,.docx" T="IBrowserFile" For="@(() => model.File)" @bind-Files="model.File" OnFilesChanged="UploadFiles">
+                                <ButtonTemplate>
+                                    <MudButton HtmlTag="label"
+                                                Variant="Variant.Filled"
+                                                Color="Color.Primary"
+                                                StartIcon="@Icons.Material.Filled.CloudUpload"
+                                               for="@uploadcontext">
+                                        Upload Files
+                                    </MudButton>
+                                </ButtonTemplate>
+                            </MudFileUpload>
+                            <MudTable Items="ListFunctions" Context="item" Hover="true" Breakpoint="Breakpoint.Sm" T="FunctionRecord">
+                                <HeaderContent>
+                                    <MudTh>Function Name</MudTh>
+                                    <MudTh>Select</MudTh>
+                                </HeaderContent>
+                                <RowTemplate>
+                                    <MudTd DataLabel="Function Name">@item.function.FunctionName</MudTd>
+                                    <MudTd DataLabel="Select"><MudCheckBox @bind-Checked="item.Selected"></MudCheckBox></MudTd>
+                                </RowTemplate>
+                            </MudTable>
+                        </MudCardContent>
+                        <MudCardActions>
+                            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="mr-2">Simpan</MudButton>
+                            <MudButton ButtonType="ButtonType.Button" OnClick="Cancel" Variant="Variant.Filled" Color="Color.Secondary">Cancel</MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+
+            </MudGrid>
+        </EditForm>
+    </DialogContent>
+    <DialogActions>
+
+    </DialogActions>
+</MudDialog>
+
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    private void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+    string UserName;
+
+    [Parameter]
+    public string CustomHeader { get; set; }
+    [Parameter]
+    public DocTemplate TaskObject { get; set; }
+    [Parameter]
+    public Action DataChanged { get; set; }
+
+    public class FunctionRecord
+    {
+        public bool Selected { set; get; }
+        public DocFunction function { set; get; }
+    }
+    public List<FunctionRecord> ListFunctions { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+       
+        FuncSvc.GetAllData().ForEach(x => { ListFunctions.Add(new FunctionRecord(){ Selected = TaskObject.DocFunctions.Contains(x.Id) , function = x}); });
+
+    }
+    private void OnValidSubmit(EditContext context)
+    {
+        if (string.IsNullOrEmpty(TaskObject.DocUrl))
+        {
+            Snackbar.Add("Select file template.", Severity.Error);
+            return;
+        }
+        TaskObject.DocFunctions.Clear();
+        foreach(var item in ListFunctions.Where(x=>x.Selected))
+        {
+            TaskObject.DocFunctions.Add(item.function.Id);
+        }
+        if (TaskObject.Id<=0)
+        {
+
+            var hasil = service.InsertData(TaskObject);
+            if (!hasil)
+            {
+                Snackbar.Add("Gagal menyimpan data. Isi data dengan lengkap.", Severity.Error);
+                //toastService.ShowError("Gagal menyimpan data. Isi data dengan lengkap.", "Perhatian");
+            }
+        }
+        else
+        {
+            service.UpdateData(TaskObject);
+        }
+
+        //In a real world scenario this bool would probably be a service to delete the item from api/database
+        Snackbar.Add("Data Saved", Severity.Success);
+        MudDialog.Close(DialogResult.Ok(TaskObject.Id));
+        DataChanged?.Invoke();
+    }
+    private FileModel model = new();
+    string FileUrl;
+
+    private async Task UploadFiles(InputFileChangeEventArgs e)
+    {
+        //If SuppressOnChangeWhenInvalid is false, perform your validations here
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.TopCenter;
+        Snackbar.Add($"This file has the extension {model.File.Name.Split(".").Last()}", Severity.Info);
+        var ErrorMsg = string.Empty;
+       
+
+        if (ErrorMsg.Length > 0)
+        {
+            Snackbar.Add(ErrorMsg, Severity.Warning);
+
+            return;
+        }
+        foreach (var file in e.GetMultipleFiles(e.FileCount))
+        {
+
+            //var file = e.File;
+            if (file != null)
+            {
+                var ms = new MemoryStream();
+                await file.OpenReadStream(AppConstants.MaxAllowedFileSize).CopyToAsync(ms);
+                var bytes = ms.ToArray();
+                //SKiaImageHelper.FixedSize(ms, 900, 500, false);
+                string newName = string.Empty;
+
+                newName = $"template_{UserName}_{DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss")}_{file.Name}";
+                FileUrl = $"{AppConstants.UploadUrlPrefix}{newName}";
+                await FileBlobHelper.UploadFile(newName, bytes);
+                TaskObject.DocUrl = FileUrl;
+                model.Name = file.Name;
+                
+
+            }
+        }
+        //TODO upload the files to the server
+    }
+}

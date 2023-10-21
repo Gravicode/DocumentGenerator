@@ -1,0 +1,135 @@
+﻿@page "/DocGen"
+@page "/DocGen/{TemplateId:long}"
+@inject NavigationManager NavMgr
+@inject IJSRuntime IJS
+@inject ISnackbar Snackbar
+@inject DocGenService service
+@implements IDisposable
+<h1>Generate Document: @service.MyDoc?.DocName</h1>
+
+<MudGrid>
+    <MudItem xs="12" sm="12">
+        <MudCard>
+            <MudCardContent>
+                <MudTabs Elevation="4" Rounded="true" Color="@Color.Success" PrevIcon="@Icons.Material.Filled.SkipPrevious" NextIcon="@Icons.Material.Filled.SkipNext">
+                    @if (service.MyFunctions != null)
+                    {
+                        foreach (var fun in service.MyFunctions)
+                        {
+                            <MudTabPanel Text="@fun.MyFunction.FunctionName">
+                                <MudItem xs="12" sm="12">
+                                    <MudPaper Elevation="0" Class="pa-4">
+                                        <MudCard>
+                                            <MudCardHeader>
+                                                <MudText Class="mt-1 mb-1" Typo="Typo.subtitle1">Desc: <b>@fun.MyFunction.Desc</b></MudText>
+                                            </MudCardHeader>
+                                            <MudCardContent>
+                                                @foreach (var key in fun.Input.Keys)
+                                                {
+                                                    <MudTextField T="string" Label="@key" HelperText="@($"please input {key}")" @bind-Value="@fun.Input[key]" Required="true" RequiredError="@(key + " is required.")" />
+                                                }
+                                            </MudCardContent>
+                                        </MudCard>
+                                    </MudPaper>
+                                </MudItem>
+                            </MudTabPanel>
+                        }
+                    }
+                </MudTabs>
+
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton ButtonType="ButtonType.Submit" Disabled="service.IsProcessing" OnClick="Process" Variant="Variant.Filled" Color="Color.Primary" Class="mr-2">Generate</MudButton>
+                <MudButton ButtonType="ButtonType.Button" OnClick="Cancel" Variant="Variant.Filled" Color="Color.Secondary">Back</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+
+</MudGrid>
+
+
+@if (service.IsProcessing)
+{ 
+    @if (Progress > 0)
+    {
+        <MudPaper Class="mt-2">
+            <MudProgressCircular Class="mt-1 mb-1 mr-1 ml-1" Style="text-align:center" Color="Color.Primary" Indeterminate="true" >
+                @Progress
+            </MudProgressCircular>
+            <MudText Align="Align.Center" Typo="Typo.body1" Color="Color.Info">
+                @PesanStatus
+            </MudText>
+        </MudPaper>
+    }
+   
+}
+@code {
+    [Parameter]
+    public long TemplateId { get; set; }
+    [CascadingParameter(Name = "ToggleToggleNavMenu")]
+    protected Action? ToggleToggleNavMenu { get; set; }
+    public byte[] Result { get; set; }
+    string PesanStatus;
+    int Progress = 0;
+    protected override async Task OnInitializedAsync()
+    {
+        if (TemplateId>0)
+        {
+            service.SetupSkill(TemplateId);
+        }
+        service.StatusChanged += UpdateProgress;
+    }
+
+    async void UpdateProgress(object sender, DocGenService.StatusChangedEventArgs e) 
+    {
+        var msg = $"{e.Progress}% - {e.Message}";
+        PesanStatus = msg;
+        Progress = e.Progress;
+        await InvokeAsync(StateHasChanged);
+        //toastService.ShowInfo(msg);
+
+    }
+    void IDisposable.Dispose()
+    {
+        service.StatusChanged -= UpdateProgress;
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+
+        }
+    }
+    async Task Cancel()
+    {
+        NavMgr.NavigateTo("/master/DocTemplate");
+    }
+
+    async Task Clear()
+    {
+        foreach (var fun in service.MyFunctions)
+            foreach (var key in fun.Input.Keys)
+            {
+                fun.Input[key] = string.Empty;
+            }
+    }
+    private async Task Process()
+    {
+        //validate
+        foreach(var fun in service.MyFunctions)
+            foreach(var input in fun.Input)
+            {
+                if (string.IsNullOrEmpty(input.Value))
+                {
+                    Snackbar.Add($"please input parameter: {input.Key} in function: {fun.MyFunction.FunctionName}",Severity.Error);
+                    return;
+                }
+            }
+        Result = await service.GenerateDoc();
+        if (Result != null)
+        {
+            await FileUtil.SaveAs(IJS, "doc-generated.docx", Result);
+            Snackbar.Add("document generated.", Severity.Success);
+        }
+    }
+}

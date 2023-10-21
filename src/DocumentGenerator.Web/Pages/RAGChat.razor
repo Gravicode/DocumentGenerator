@@ -1,0 +1,215 @@
+﻿@page "/rag-chat"
+@using System.Web;
+@using Microsoft.SemanticMemory;
+@using Microsoft.SemanticMemory.DataFormats.Office;
+@using Microsoft.SemanticMemory.DataFormats.Pdf;
+@using Microsoft.SemanticMemory.MemoryStorage.DevTools;
+@using Microsoft.SemanticMemory.MemoryStorage.Qdrant;
+@inject AppState AppState
+@inject ISnackbar Snackbar
+
+<h3>Document Search (RAG)</h3>
+<MudGrid Justify="Justify.Center">
+    <MudItem id="answers" xs="12" Class="overflow-x-auto">
+        <MudStack Reverse="@IsReversed" Spacing="12">
+            @foreach (var item in Items)
+            {
+                <MudStack Justify="Justify.Center" AlignItems="AlignItems.Start" Spacing="4">
+                    <MudBadge Origin="Origin.TopLeft" Overlap="true" Color="Color.Secondary"
+                          Icon="@Icons.Material.Filled.QuestionMark" Class="d-flex align-self-end">
+                        <MudPaper Class="pa-6 d-flex flex-column" Elevation="3">
+                            <MudText Typo="Typo.body1" Align="Align.End">
+                                @item.Question
+                            </MudText>
+                            <MudText Typo="Typo.caption" Align="Align.End" Color="Color.Secondary">
+                                @($"Asked at {item.CreatedDate:h:mm:ss tt}")
+                            </MudText>
+                        </MudPaper>
+                    </MudBadge>
+                    <div class="ten-twelves">
+                        <MudBadge Origin="Origin.TopLeft" Overlap="true" Color="Color.Secondary"
+                              Icon="@Icons.Material.Filled.AutoAwesome">
+                            <MudGrid Justify="Justify.Center">
+                                <MudItem xs="12">
+                                    <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true">
+                                        <MudTabPanel Icon="@Icons.Material.Filled.Quickreply" Text="Answer" ToolTip="Answer text">
+                                            <ChildContent>
+                                                <MudPaper Class="pa-6" Elevation="3">
+                                                    <MudText Typo="Typo.body1">
+                                                        @((MarkupString)item.Answer)
+                                                    </MudText>
+                                                    @if (item is { Sources.Count: > 0 })
+                                                    {
+                                                        <div class="pt-4">
+                                                            <MudText Typo="Typo.subtitle2" Class="pb-2">Citations:</MudText>
+                                                            @foreach (var citation in item.Sources)
+                                                            {
+                                                                var icon = citation.Source.EndsWith(".pdf")
+                                                                ? @Icons.Custom.FileFormats.FilePdf
+                                                                : null;
+                                                                <MudChip Variant="Variant.Text" Color="Color.Info"
+                                                             Icon="@icon" OnClick="@(_ => OnShowCitation(citation.Link))">
+                                                                    @citation.Source
+                                                                </MudChip>
+                                                            }
+                                                        </div>
+                                                    }
+                                                   
+                                                </MudPaper>
+                                            </ChildContent>
+                                        </MudTabPanel>
+                                    </MudTabs>
+                                </MudItem>
+                            </MudGrid>
+                        </MudBadge>
+                    </div>
+                </MudStack>
+            }
+        </MudStack>
+
+    </MudItem>
+    @if (_isReceivingResponse)
+    {
+        <MudItem xs="12" Class="rounded">
+            <MudGrid>
+                <MudItem xs="12" lg="10">
+                    <MudStack Row="true">
+                        <MudProgressCircular Color="Color.Success" Indeterminate="true" />
+                        <MudChip Color="Color.Success">Answering...</MudChip>
+                    </MudStack>
+
+                </MudItem>
+            </MudGrid>
+        </MudItem>
+    }
+    <MudItem xs="12" Class="rounded">
+        <MudGrid>
+            <MudItem xs="12" lg="10">
+                <MudBadge id="toggle-mic" Origin="Origin.TopRight" Color="Color.Primary"
+                          Overlap=true Dot=false Bordered=false Icon="@Icons.Material.Filled.Mic"
+                          Style="width:100%; cursor:pointer;">
+                    <MudTextField @bind-Value="@_userQuestion" Label="Type your question here.."
+                                  Variant="Variant.Outlined" Adornment="Adornment.End"
+                                  AdornmentIcon="@Icons.Material.Filled.ChatBubble"
+                                  AdornmentColor="Color.Secondary" AutoFocus="true"
+                                  Placeholder="Type your question here.." Lines="3"
+                                  IconSize="Size.Large"
+                                  HelperText="Type your question here.." Immediate="true"
+                                  OnKeyUp="@OnKeyUpAsync" Clearable="true"
+                                  Counter="1_000" MaxLength="1_000" />
+                </MudBadge>
+            </MudItem>
+            <MudItem xs="0" lg="2" Class="d-flex align-self-center">
+                <MudGrid Justify="Justify.Center">
+                    <MudItem xs="9" Class="pa-2">
+                        <MudFab Color="Color.Secondary" Size="Size.Large"
+                                StartIcon=@Icons.Material.Filled.Send Class="full-width"
+                                Label="Chat" aria-label="Ask question button."
+                                OnClick="@OnAskClickedAsync"
+                                Disabled=@(_isReceivingResponse || string.IsNullOrWhiteSpace(_userQuestion)) />
+                    </MudItem>
+                    <MudItem xs="3" Class="pa-2">
+                        <MudTooltip Arrow="true" Text="Clear chat history" Placement="Placement.Top">
+                            <MudFab Color="Color.Primary" Size="Size.Medium"
+                                    StartIcon=@Icons.Material.Filled.DeleteForever
+                                    aria-label="Clear chat."
+                                    OnClick="@OnClearChat" Disabled=@_isReceivingResponse />
+                        </MudTooltip>
+                    </MudItem>
+                </MudGrid>
+            </MudItem>
+        </MudGrid>
+    </MudItem>
+    <MudScrollToTop Selector="#answers"
+                    VisibleCssClass="visible absolute"
+                    HiddenCssClass="invisible">
+        <MudFab Color="Color.Primary" IconSize="Size.Large" StartIcon="@Icons.Material.Filled.ArrowUpward" />
+    </MudScrollToTop>
+</MudGrid>
+@code {
+    bool HasIndex;
+    string Status = string.Empty;
+    bool IsLoading = false;
+    public List<RAGItem> Items { get; set; } = new();
+    bool IsReversed = false;
+    bool _isReceivingResponse = false;
+    string _userQuestion;
+    Memory DocMemory;
+    string TempFolder;
+    public bool WithFallBack { get; set; } = false;
+    protected override async Task OnInitializedAsync()
+    {
+
+        var (model, apiKey, orgId) = AppConstants.GetSettings();
+        var config = new OpenAIConfig() { EmbeddingModel = "text-embedding-ada-002", APIKey = apiKey, OrgId = orgId, TextModel = model, MaxRetries = 3 };
+        var configVector = new SimpleVectorDbConfig() { StorageType = SimpleVectorDbConfig.StorageTypes.TextFile, Directory = FileIndexer.VectorDir };
+        DocMemory = new Microsoft.SemanticMemory.MemoryClientBuilder()
+        .WithSimpleVectorDb(configVector)
+        .WithOpenAIDefaults(apiKey, orgId)
+        .BuildServerlessClient();
+        HasIndex = Directory.GetFiles(FileIndexer.VectorDir).Any() || Directory.GetDirectories(FileIndexer.VectorDir).Any();
+    }
+
+    async Task OnShowCitation(string LinkUrl)
+    {
+
+    }
+    async Task OnClearChat()
+    {
+        Items.Clear();
+    }
+    private async Task OnKeyUpAsync(KeyboardEventArgs args)
+    {
+        if (args is { Key: "Enter", ShiftKey: false })
+        {
+            await OnAskClickedAsync();
+        }
+    }
+
+    async Task OnAskClickedAsync()
+    {
+        
+        if (!HasIndex)
+        {
+            Snackbar.Add("Please index the docs first.", Severity.Warning);
+            return;
+
+        }
+        try
+        {
+            _isReceivingResponse = true;
+            var answer = await DocMemory.AskAsync(_userQuestion);
+            Console.WriteLine("Sources:\n");
+            var res = answer.Result;
+
+            if (res.Length < 20 && res.Trim().Contains("INFO NOT FOUND"))
+            {
+                Snackbar.Add("Data not found", Severity.Info);
+            }
+
+            var newItem = new RAGItem() { Answer = res, CreatedDate = DateHelper.GetLocalTimeNow(), Question = _userQuestion };
+            //only for debug
+            foreach (var x in answer.RelevantSources)
+            {
+                newItem.Sources.Add(new SourceItem() { Link = x.Link, Source = x.SourceName });
+                Console.WriteLine($"  - {x.SourceName}  - {x.Link} [{x.Partitions.First().LastUpdate:D}]");
+            }
+            Console.WriteLine($"Question: {_userQuestion}\n\nAnswer: {answer.Result}");
+            Items.Add(newItem);
+            _userQuestion = string.Empty;
+
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add("error answer question:" + ex, Severity.Warning);
+            Console.WriteLine( "error answer question:"+ex);
+
+        }
+        finally
+        {
+            _isReceivingResponse = false;
+        }
+    }
+
+  
+}
